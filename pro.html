@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shahin, Will You Be My Girlfriend?</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+    
+    body {
+      background: linear-gradient(135deg, #ffd6e7, #ffafbd);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      position: relative;
+      color: #5d001e;
+      padding: 20px;
+    }
+    
+    /* Floating hearts background */
+    .hearts-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      overflow: hidden;
+    }
+    
+    .heart {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: #ff6b6b;
+      transform: rotate(45deg);
+      opacity: 0.7;
+      animation: float 15s linear infinite;
+    }
+    
+    .heart:before, .heart:after {
+      content: '';
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: #ff6b6b;
+      border-radius: 50%;
+    }
+    
+    .heart:before {
+      top: -10px;
+      left: 0;
+    }
+    
+    .heart:after {
+      top: 0;
+      left: -10px;
+    }
+    
+    @keyframes float {
+      0% {
+        transform: rotate(45deg) translateY(100vh);
+        opacity: 0.7;
+      }
+      100% {
+        transform: rotate(45deg) translateY(-100px);
+        opacity: 0;
+      }
+    }
+    
+    /* Main container */
+    .container {
+      max-width: 800px;
+      width: 90%;
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 20px;
+      box-shadow: 0 15px 40px rgba(194, 37, 92, 0.25);
+      overflow: hidden;
+      position: relative;
+      z-index: 10;
+      padding: 40px 30px;
+      text-align: center;
+      backdrop-filter: blur(5px);
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      animation: fadeIn 1s ease-out, pulse 6s infinite alternate;
+    }
+    
+    /* Header with animated title */
+    .header {
+      margin-bottom: 30px;
+      position: relative;
+      padding-bottom: 20px;
+      border-bottom: 2px solid rgba(233, 30, 99, 0.1);
+    }
+    
+    .header h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 3.8rem;
+      color: #e91e63;
+      text-shadow: 2px 2px 8px rgba(233, 30, 99, 0.2);
+      margin-bottom: 15px;
+      font-weight: 700;
+      position: relative;
+      display: inline-block;
+      letter-spacing: 1px;
+    }
+    
+    .header h1 span {
+      color: #ff6b6b;
+      font-weight: 800;
+      display: block;
+      font-size: 4rem;
+      margin-top: 5px;
+      text-shadow: 0 0 15px rgba(255, 107, 107, 0.4);
+    }
+    
+    .header p {
+      font-size: 1.3rem;
+      color: #6d6875;
+      max-width: 600px;
+      margin: 0 auto;
+      line-height: 1.6;
+      font-style: italic;
+    }
+    
+    .couple-photo {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      border: 4px solid #ffafbd;
+      margin: 20px auto;
+      background: linear-gradient(45deg, #ffafbd, #ffc3a0);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+      position: relative;
+      overflow: hidden;
+      animation: photoFloat 8s ease-in-out infinite;
+    }
+    
+    .couple-photo:before {
+      content: "S & N";
+      font-size: 2.5rem;
+      color: white;
+      font-weight: bold;
+      font-family: 'Playfair Display', serif;
+      text-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    }
+    
+    /* Content area */
+    .content {
+      padding: 20px 0;
+      margin: 30px 0;
+      position: relative;
+    }
+    
+    .content:before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80%;
+      height: 1px;
+      background: linear-gradient(to right, transparent, #ffafbd, transparent);
+    }
+    
+    .content:after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80%;
+      height: 1px;
+      background: linear-gradient(to right, transparent, #ffafbd, transparent);
+    }
+    
+    /* Question text */
+    .question {
+      font-size: 2.4rem;
+      margin: 40px 0;
+      min-height: 140px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.5s ease;
+      padding: 25px;
+      border-radius: 18px;
+      background: rgba(255, 182, 193, 0.15);
+      position: relative;
+      line-height: 1.4;
+      font-family: 'Playfair Display', serif;
+      box-shadow: inset 0 0 15px rgba(233, 30, 99, 0.1);
+    }
+    
+    .question-icon {
+      font-size: 2.8rem;
+      display: inline-block;
+      margin: 0 15px;
+      color: #e91e63;
+      animation: heartbeat 1.5s infinite;
+    }
+    
+    /* Progress indicator */
+    .progress {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin: 25px 0 35px;
+    }
+    
+    .progress-step {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: rgba(233, 30, 99, 0.3);
+      transition: all 0.3s ease;
+      box-shadow: 0 0 8px rgba(233, 30, 99, 0.2);
+    }
+    
+    .progress-step.active {
+      background: #e91e63;
+      transform: scale(1.3);
+      box-shadow: 0 0 15px rgba(233, 30, 99, 0.4);
+    }
+    
+    /* Buttons container */
+    .buttons {
+      display: flex;
+      justify-content: center;
+      gap: 35px;
+      margin-top: 35px;
+      flex-wrap: wrap;
+    }
+    
+    /* Button styling */
+    .btn {
+      padding: 18px 40px;
+      font-size: 1.5rem;
+      border-radius: 50px;
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-weight: 600;
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
+      box-shadow: 0 7px 20px rgba(0, 0, 0, 0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      min-width: 240px;
+      letter-spacing: 1px;
+    }
+    
+    .btn:before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 0%;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.3);
+      transition: all 0.4s ease;
+      z-index: -1;
+    }
+    
+    .btn:hover:before {
+      width: 100%;
+    }
+    
+    .btn:active {
+      transform: translateY(3px);
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+    }
+    
+    .yes-btn {
+      background: linear-gradient(45deg, #ff6b6b, #e91e63);
+      color: white;
+    }
+    
+    .no-btn {
+      background: linear-gradient(45deg, #4ecdc4, #1a936f);
+      color: white;
+    }
+    
+    /* Heart animation */
+    .heart-animation {
+      position: absolute;
+      font-size: 2.2rem;
+      color: #e91e63;
+      opacity: 0;
+      animation: fly 5s linear forwards;
+      z-index: 20;
+    }
+    
+    @keyframes fly {
+      0% {
+        opacity: 1;
+        transform: translate(0, 0) scale(1);
+      }
+      50% {
+        opacity: 0.8;
+        transform: translate(100px, -100px) scale(1.4);
+      }
+      100% {
+        opacity: 0;
+        transform: translate(200px, -200px) scale(0.5);
+      }
+    }
+    
+    /* Acceptance message */
+    .acceptance {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.92);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 100;
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.8s ease;
+    }
+    
+    .acceptance.show {
+      opacity: 1;
+      pointer-events: all;
+    }
+    
+    .message-box {
+      background: linear-gradient(135deg, #fff5f7, #ffffff);
+      border-radius: 25px;
+      padding: 50px;
+      max-width: 750px;
+      width: 90%;
+      text-align: center;
+      position: relative;
+      transform: scale(0.8);
+      transition: transform 0.5s ease;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.35);
+      border: 1px solid rgba(255, 182, 193, 0.3);
+      overflow: hidden;
+    }
+    
+    .acceptance.show .message-box {
+      transform: scale(1);
+    }
+    
+    .message-box h2 {
+      font-size: 3.5rem;
+      color: #e91e63;
+      margin-bottom: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      font-family: 'Playfair Display', serif;
+      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+    }
+    
+    .message-content {
+      font-size: 1.35rem;
+      line-height: 1.9;
+      margin-bottom: 35px;
+      color: #333;
+      text-align: left;
+      max-height: 55vh;
+      overflow-y: auto;
+      padding: 25px;
+      background: rgba(255, 228, 225, 0.2);
+      border-radius: 15px;
+      border: 1px solid rgba(255, 182, 193, 0.2);
+      font-family: 'Poppins', sans-serif;
+    }
+    
+    .message-content p {
+      margin-bottom: 15px;
+    }
+    
+    .close-btn {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      font-size: 2rem;
+      background: none;
+      border: none;
+      color: #e91e63;
+      cursor: pointer;
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+    }
+    
+    .close-btn:hover {
+      background: rgba(233, 30, 99, 0.1);
+      transform: rotate(90deg);
+    }
+    
+    /* Footer */
+    .footer {
+      margin-top: 35px;
+      font-size: 1.1rem;
+      color: #6d6875;
+      opacity: 0.9;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      font-style: italic;
+      padding-top: 20px;
+      border-top: 1px solid rgba(233, 30, 99, 0.1);
+    }
+    
+    /* Animations */
+    @keyframes pulse {
+      0% { transform: scale(1); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15); }
+      50% { transform: scale(1.01); box-shadow: 0 15px 40px rgba(194, 37, 92, 0.3); }
+      100% { transform: scale(1); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15); }
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    @keyframes heartbeat {
+      0% { transform: scale(1); }
+      15% { transform: scale(1.2); }
+      30% { transform: scale(1); }
+      45% { transform: scale(1.1); }
+      60% { transform: scale(1); }
+      100% { transform: scale(1); }
+    }
+    
+    @keyframes photoFloat {
+      0% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-15px) rotate(3deg); }
+      100% { transform: translateY(0) rotate(0deg); }
+    }
+    
+    /* Responsive design */
+    @media (max-width: 768px) {
+      .container {
+        width: 95%;
+        padding: 25px 15px;
+      }
+      
+      .header h1 {
+        font-size: 2.8rem;
+      }
+      
+      .header h1 span {
+        font-size: 3rem;
+      }
+      
+      .question {
+        font-size: 2rem;
+        min-height: 120px;
+        padding: 20px;
+      }
+      
+      .buttons {
+        flex-direction: column;
+        align-items: center;
+        gap: 25px;
+      }
+      
+      .btn {
+        width: 100%;
+        max-width: 300px;
+        padding: 16px 30px;
+        font-size: 1.3rem;
+        min-width: auto;
+      }
+      
+      .message-box {
+        padding: 35px 20px;
+      }
+      
+      .message-box h2 {
+        font-size: 2.5rem;
+      }
+      
+      .message-content {
+        font-size: 1.15rem;
+      }
+      
+      .couple-photo {
+        width: 100px;
+        height: 100px;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .header h1 {
+        font-size: 2.3rem;
+      }
+      
+      .header h1 span {
+        font-size: 2.5rem;
+      }
+      
+      .question {
+        font-size: 1.7rem;
+      }
+      
+      .btn {
+        font-size: 1.2rem;
+        padding: 14px 25px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Floating hearts background -->
+  <div class="hearts-container" id="hearts-container"></div>
+  
+  <!-- Main content container -->
+  <div class="container">
+    <div class="header">
+      <h1>Meri Pyaari Shahin<br><span>Ke Liye</span></h1>
+      <p>Tumhare saath har pal ek khoobsurat sapne jaisa lagta hai. Aaj main tumse kuch bahut important poochna chahta hoon...</p>
+      
+      <div class="couple-photo"></div>
+    </div>
+    
+    <div class="content">
+      <!-- Progress indicator -->
+      <div class="progress" id="progress">
+        <div class="progress-step active"></div>
+        <div class="progress-step"></div>
+        <div class="progress-step"></div>
+        <div class="progress-step"></div>
+        <div class="progress-step"></div>
+      </div>
+      
+      <!-- Question text -->
+      <div class="question" id="question">
+        Kya tum meri girlfriend banogi? <i class="question-icon fas fa-heart"></i>
+      </div>
+      
+      <div class="buttons">
+        <button class="btn yes-btn" id="yes-btn">
+          <i class="fas fa-heart"></i> Haan, Bilkul!
+        </button>
+        <button class="btn no-btn" id="no-btn">
+          <i class="fas fa-arrow-right"></i> Agla Sawaal
+        </button>
+      </div>
+    </div>
+    
+    <div class="footer">
+      <i class="fas fa-heart" style="color: #e91e63;"></i> Sabse amazing Shahin ke liye pyaar se banaya gaya <i class="fas fa-heart" style="color: #e91e63;"></i>
+    </div>
+  </div>
+  
+  <!-- Acceptance message -->
+  <div class="acceptance" id="acceptance">
+    <div class="message-box">
+      <button class="close-btn" id="close-btn">
+        <i class="fas fa-times"></i>
+      </button>
+      <h2 id="letter-title"><i class="fas fa-heart"></i> Tumne Mujhe Itna Khush Kar Diya!</h2>
+      <div class="message-content" id="letter-content">
+        <!-- Letter content will be inserted here -->
+      </div>
+    </div>
+  </div>
+  
+  <script>
+    // Create floating hearts
+    const heartsContainer = document.getElementById('hearts-container');
+    for (let i = 0; i < 40; i++) {
+      const heart = document.createElement('div');
+      heart.classList.add('heart');
+      heart.style.left = `${Math.random() * 100}%`;
+      heart.style.animationDuration = `${Math.random() * 10 + 10}s`;
+      heart.style.animationDelay = `${Math.random() * 5}s`;
+      heart.style.opacity = Math.random() * 0.5 + 0.3;
+      heart.style.width = `${Math.random() * 15 + 10}px`;
+      heart.style.height = heart.style.width;
+      heart.style.backgroundColor = `hsl(${Math.random() * 360}, 70%, 65%)`;
+      heartsContainer.appendChild(heart);
+    }
+    
+    // DOM elements
+    const yesBtn = document.getElementById('yes-btn');
+    const noBtn = document.getElementById('no-btn');
+    const question = document.getElementById('question');
+    const progressSteps = document.querySelectorAll('.progress-step');
+    const acceptance = document.getElementById('acceptance');
+    const closeBtn = document.getElementById('close-btn');
+    const letterTitle = document.getElementById('letter-title');
+    const letterContent = document.getElementById('letter-content');
+    
+    // Questions array with icons instead of emojis
+    const questions = [
+      "Kya tum meri girlfriend banogi?",
+      "Please haan bol do!",
+      "Main tumhe chocolates dilaunga!",
+      "Main bartan dhulunga!",
+      "Acha se sochna: Meri girlfriend bano ya mujhe apna boyfriend bana lo?"
+    ];
+    
+    const questionIcons = [
+      "fas fa-heart",
+      "far fa-sad-tear",
+      "fas fa-candy-cane",
+      "fas fa-hands-bubbles",
+      "fas fa-heart"
+    ];
+    
+    // Letters for different responses
+    const letters = {
+      earlyYes: `
+        <p>Meri pyaari Shahin,</p>
+        <p>Jab se maine tumhe dekha hai, mujhe pata tha ki tum mein kuch khaas hai. Aaj, mera dil khushi se bhar gaya hai kyunki tum meri banne ke liye raazi ho gayi.</p>
+        <p>Tumhara "Haan" sunkar main duniya ka sabse khush aadmi ban gaya hoon. Main waada karta hoon ki main har pal tumhare saath rahunga, har mushkil mein tumhara saath dunga, aur har din tumse zyada pyaar karunga.</p>
+        <p>Tum mere liye sab kuch ho, aur main is khoobsurat safar ko shuru karne ke liye intezaar nahi kar sakta. Main hamesha tumhare saath rahunga, chahe kuch bhi ho, aur har din tumhe pyaar aur ehsaas dilata rahunga.</p>
+        <p>Pyaar se, hamesha ke liye,</p>
+        <p style="text-align: right; margin-top: 20px; font-weight: 600; font-family: 'Playfair Display', serif;">Tumhara Nasir</p>
+      `,
+      finalYes: `
+        <p>Meri khoobsurat girlfriend Shahin,</p>
+        <p>Tumne mujhe zindagi ka sabse khush insaan bana diya! Meri girlfriend banne ka faisla karke tumne mujhe sabse bada tohfa diya hai.</p>
+        <p>Main waada karta hoon ki main tumhe pyaar karunga, izzat dunga aur apne pure dil se tumhari hifazat karunga. Main tumhara sahara, tumhara sukoon aur tumhare har kaam mein tumhara sabse bada haami ban kar rahunga.</p>
+        <p>Humari ek saath journey aaj shuru hoti hai, aur main tumhare saath anek khoobsurat yaadon ko banane ke liye bekarar hoon. Main hamesha imandaar, wafadar aur tumhari muskurahat ke liye samarpit rahunga.</p>
+        <p>Tum mere sapno ki haqiqat ho, aur main har din yeh sabit karunga ki tum mere liye kitni important ho.</p>
+        <p style="text-align: right; margin-top: 20px; font-weight: 600; font-family: 'Playfair Display', serif;">Hamesha tumhara,<br>Nasir</p>
+      `,
+      finalNo: `
+        <p>Meri amazing partner Shahin,</p>
+        <p>Tumne mujhe duniya ka sabse kismat wala insaan bana diya! Mujhe bahut khushi hai ki tumne mujhe apna boyfriend banane ka faisla kiya.</p>
+        <p>Main waada karta hoon ki zindagi ki har mushkil mein tumhare saath khada rahunga. Main tumhara partner, tumhara confidant aur tumhara sabse bada cheerleader ban kar rahunga. Tumhari khushi hamesha meri pehli priority hogi.</p>
+        <p>Humari ek saath adventure aaj shuru hoti hai, aur main tumhare saath ek khoobsurat mustaqbil banane ke liye bahut excited hoon. Main har pal ko cherish karunga aur hamesha tumhari khoobsurati ko appreciate karta rahunga.</p>
+        <p>Tumne mera dil jeet liya hai, aur main har din tumhe wafadari aur gehrayi se pyaar karta rahunga.</p>
+        <p style="text-align: right; margin-top: 20px; font-weight: 600; font-family: 'Playfair Display', serif;">Pyaar se,<br>Nasir</p>
+      `
+    };
+    
+    let currentQuestion = 0;
+    
+    // Update progress indicator
+    function updateProgress() {
+      progressSteps.forEach((step, index) => {
+        if (index <= currentQuestion) {
+          step.classList.add('active');
+        } else {
+          step.classList.remove('active');
+        }
+      });
+    }
+    
+    // Update question display
+    function updateQuestion() {
+      const icon = document.querySelector('.question-icon');
+      icon.className = `question-icon ${questionIcons[currentQuestion]}`;
+      question.innerHTML = `${questions[currentQuestion]} ${icon.outerHTML}`;
+    }
+    
+    // Create heart animation
+    function createHeartAnimation(x, y) {
+      const heart = document.createElement('div');
+      heart.classList.add('heart-animation');
+      heart.innerHTML = '<i class="fas fa-heart"></i>';
+      heart.style.left = `${x}px`;
+      heart.style.top = `${y}px`;
+      document.body.appendChild(heart);
+      
+      setTimeout(() => {
+        heart.remove();
+      }, 5000);
+    }
+    
+    // Show acceptance letter
+    function showLetter(type) {
+      if (type === 'earlyYes') {
+        letterTitle.innerHTML = '<i class="fas fa-heart"></i> Tumne Mujhe Itna Khush Kar Diya!';
+        letterContent.innerHTML = letters.earlyYes;
+      } else if (type === 'finalYes') {
+        letterTitle.innerHTML = '<i class="fas fa-heart"></i> Welcome to Forever!';
+        letterContent.innerHTML = letters.finalYes;
+      } else if (type === 'finalNo') {
+        letterTitle.innerHTML = '<i class="fas fa-heart"></i> Best Decision Ever!';
+        letterContent.innerHTML = letters.finalNo;
+      }
+      
+      acceptance.classList.add('show');
+    }
+    
+    // Yes button event
+    yesBtn.addEventListener('click', () => {
+      // Create multiple hearts
+      for (let i = 0; i < 25; i++) {
+        setTimeout(() => {
+          createHeartAnimation(
+            Math.random() * window.innerWidth,
+            Math.random() * window.innerHeight
+          );
+        }, i * 80);
+      }
+      
+      // Show appropriate letter
+      if (currentQuestion < 4) {
+        showLetter('earlyYes');
+      } else {
+        showLetter('finalYes');
+      }
+    });
+    
+    // No button event
+    noBtn.addEventListener('click', () => {
+      // Advance to next question
+      if (currentQuestion < 4) {
+        currentQuestion++;
+        updateQuestion();
+        updateProgress();
+        
+        // Change button text for last question
+        if (currentQuestion === 4) {
+          noBtn.innerHTML = '<i class="fas fa-heart"></i> Mujhe Apna Boyfriend Bana Lo!';
+          yesBtn.innerHTML = '<i class="fas fa-heart"></i> Meri Girlfriend Bano!';
+        }
+        
+        // Create hearts from the button
+        createHeartAnimation(
+          noBtn.getBoundingClientRect().left + noBtn.offsetWidth/2,
+          noBtn.getBoundingClientRect().top + noBtn.offsetHeight/2
+        );
+      } 
+      // For the last question, "No" is actually a positive response
+      else if (currentQuestion === 4) {
+        // Create multiple hearts
+        for (let i = 0; i < 25; i++) {
+          setTimeout(() => {
+            createHeartAnimation(
+              Math.random() * window.innerWidth,
+              Math.random() * window.innerHeight
+            );
+          }, i * 80);
+        }
+        
+        // Show boyfriend letter
+        setTimeout(() => {
+          showLetter('finalNo');
+        }, 1000);
+      }
+    });
+    
+    // Close button for acceptance message
+    closeBtn.addEventListener('click', () => {
+      acceptance.classList.remove('show');
+    });
+    
+    // Add animation to elements when page loads
+    document.addEventListener('DOMContentLoaded', () => {
+      const elements = document.querySelectorAll('.header, .content, .footer');
+      elements.forEach((el, i) => {
+        setTimeout(() => {
+          el.style.animation = 'fadeIn 1s forwards';
+        }, i * 300);
+      });
+    });
+  </script>
+</body>
+</html>
